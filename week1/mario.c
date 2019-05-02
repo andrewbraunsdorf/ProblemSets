@@ -18,8 +18,14 @@ int main(void)
     {
         for (int spaces = height - i; spaces > 0; spaces--)
         {
-            printf ("#");
+            printf (" ");
             // printf("#");
+        }
+        for (int hashes = -1; hashes < i; hashes ++)
+        {
+            printf ("#");
+            // spaces--;
+            // printf(" ");
         }
         printf("\n");
     }
