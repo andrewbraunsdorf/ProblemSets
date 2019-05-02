@@ -1,20 +1,31 @@
 #include <cs50.h>
 #include <stdio.h>
 
-
-
 int main(void)
 {
     int height;
     do
     {
+        // //Use this if they dont want the below code
+        // printf("Enter a number between 1 and 8\n");
+        // height = get_int();
         height = get_int("Enter a number between 1 and 8\n");
     }
     while (height < 0 || height > 8);
 
-
+    // int spaces = height - 1;
+    for (int i = 0; i < height; i++)
+    {
+        for (int spaces = height - i; spaces > 0; spaces--)
+        {
+            printf ("#");
+            // printf("#");
+        }
+        printf("\n");
+    }
 
 }
+
 
 
     // int height = get_int("Enter a number between 1 and 8\n");
@@ -31,3 +42,6 @@ int main(void)
 
 // prompt user for height
 //if height < 1 or height > 8 prompt user for height
+// height
+// height -1
+// height -2
