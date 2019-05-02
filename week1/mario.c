@@ -18,7 +18,7 @@ int main(void)
     for (int line = 0; line < height; line++)
     {
         // spaces is equal to the number entered minus the line #, only when spaces is greater than 0
-        for (int spaces = height - line; spaces > 0; spaces--)
+        for (int spaces = height - line - 1; spaces > 0; spaces--)
         {
             printf(" ");
             // printf("#");
