@@ -12,6 +12,8 @@ int main(void)
         height = get_int("Enter a number between 1 and 8\n");
     }
     while (height < 1 || height > 8);
+    // while (height < 1 && height > 8);
+    // while (height >= 1 && height <= 8);
 
     // int spaces = height - 1;
     // for loop base, which just iterates through and adds new line at end
