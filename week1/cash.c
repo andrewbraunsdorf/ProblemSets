@@ -24,8 +24,11 @@ int main(void)
     {
         dimes = ((cents - (quarters * 25)) / 10);
     }
-
-    coins = (quarters + dimes);
+    if (cents >= 5)
+    {
+        nickels = ((cents - ((quarters * 25) + (dimes * 10))) / 5);
+    }
+    coins = (quarters + dimes + nickels);
 
     printf("%i\n", cents);
     printf("%i\n", coins);
