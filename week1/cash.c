@@ -20,9 +20,12 @@ int main(void)
     int cents = round(dollarAmount * 100);
 
     quarters = (cents / 25);
+    if (cents >= 10)
+    {
+        dimes = ((cents - (quarters * 25)) / 10);
+    }
 
-
-    coins = (quarters);
+    coins = (quarters + dimes);
 
     printf("%i\n", cents);
     printf("%i\n", coins);
