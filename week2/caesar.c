@@ -22,6 +22,8 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    printf("hello, %s\n", argv[1]);
+    string code = get_string("Plaintext: ");
+    printf("hello, %s\n", code);
+    // argv[1]
     return 0;
 }
