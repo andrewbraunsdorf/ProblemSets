@@ -5,13 +5,23 @@
 
 //ci = (pi + k) % 26
 
+
+
 int main(int argc, string argv[])
 {
     if (argc != 2)
     {
-        printf("missing command-line argument\n");
+        printf("Type ./caesar key\n");
         return 1;
     }
+    int key = atoi(argv[1]);;
+
+    if (key <= 0)
+    {
+        printf("Type ./caesar key\n");
+        return 1;
+    }
+
     printf("hello, %s\n", argv[1]);
     return 0;
 }
