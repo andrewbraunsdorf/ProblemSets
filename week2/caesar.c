@@ -8,12 +8,14 @@ int main(int argc, string argv[])
     if (argc != 2)
     {
         printf("Type ./caesar key\n");
+        return 1;
     }
-    int key = atoi(argv[1]);;
+    int key = atoi(argv[1]);
 
     if (key <= 0)
     {
         printf("Type ./caesar key\n");
+        return 1;
     }
 
     string code = get_string("Plaintext: ");
