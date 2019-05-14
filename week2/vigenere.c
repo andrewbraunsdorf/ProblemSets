@@ -26,29 +26,26 @@ int main(int argc, string argv[])
         }
     }
 
-
     string code = get_string("Plaintext: ");
     int keyLength = strlen(key);
     int length = strlen(code);
-    // int cypherLength = 0;
+    int cypherLength = 0;
     printf("ciphertext: ");
 
-    for (int line = 0, cypherLength = 0; line < length; line++)
+    for (int line = 0; line < length; line++)
     {
         if (isalpha(code[line]))
         {
             int magic = cypherLength % keyLength;
-
+            int result = shift(key[magic]);
 
             if isupper(code[line])
             {
-                int result = tolower(key[magic] - 65);
-                printf("%c", ((((code[line] + result) - 65) % 26) + 65));
+                printf("%c", (((code[line] + result - 65) % 26) + 65));
             }
             else if islower(code[line])
             {
-                int result = tolower(key[magic] - 97);
-                printf("%c", ((((code[line] + result) - 97) % 26) + 97));
+                printf("%c", (((code[line] + result - 97) % 26) + 97));
             }
             cypherLength++;
             // printf("%i\n", magic);
@@ -65,14 +62,21 @@ int main(int argc, string argv[])
     printf("\n");
 }
 
-
+int shift(char c)
+{
+    if (c > 96)
+    {
+        return (c - 'a');
+    }
+    else
+    {
+        return (c - 'A');
+    }
+    // printf("char c = %c\n", c);
+}
 
 // int key = shift(argv[1][0]);
 // printf("%i\n", key);
-
-
-
-
 
 // if (argc != 2)
 // {
@@ -94,21 +98,6 @@ int main(int argc, string argv[])
 // {
 //     printf("Else\n");
 //     return 0;
-// }
-
-
-
-// int shift(char c)
-// {
-//     printf("char c = %c\n", c);
-//     if (c > 96)
-//     {
-//         return (c - 'a');
-//     }
-//     else
-//     {
-//         return (c - 'A');
-//     }
 // }
 
 // for (int character = 0; character < strlen(cypher); character++)
