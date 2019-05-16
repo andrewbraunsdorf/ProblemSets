@@ -41,11 +41,11 @@ int main(int argc, string argv[])
 
             if isupper(code[line])
             {
-                printf("%c", (((code[line] + result - 65) % 26) + 65));
+                printf("%c", (((code[line] + result - 'A') % 26) + 'A'));
             }
             else if islower(code[line])
             {
-                printf("%c", (((code[line] + result - 97) % 26) + 97));
+                printf("%c", (((code[line] + result - 'a') % 26) + 'a'));
             }
             cypherLength++;
             // printf("%i\n", magic);
@@ -64,7 +64,7 @@ int main(int argc, string argv[])
 
 int shift(char c)
 {
-    if (c > 96)
+    if (c >= 97)
     {
         return (c - 'a');
     }
