@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     if (factor <= 0 || factor > 100)
     {
         printf("Usage: resize n infile outfile\n");
-        return 1;
+        return 2;
     }
 
     // remember filenames
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     if (inptr == NULL)
     {
         fprintf(stderr, "Could not open %s.\n", infile);
-        return 2;
+        return 3;
     }
 
     // open output file
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     {
         fclose(inptr);
         fprintf(stderr, "Could not create %s.\n", outfile);
-        return 3;
+        return 4;
     }
 
     // read infile's BITMAPFILEHEADER
@@ -64,8 +64,6 @@ int main(int argc, char *argv[])
     int oldHeight = bi.biHeight;
     int newWidth = bi.biWidth * factor;
     int newHeight = bi.biHeight * factor;
-
-
 
     // determine padding for scanlines
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -106,6 +104,7 @@ int main(int argc, char *argv[])
                     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
                 }
             }
+            // skips over padding if any
             fseek(inptr, padding, SEEK_CUR);
 
 
