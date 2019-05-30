@@ -15,6 +15,12 @@ int main(int argc, char *argv[])
     }
     int factor = atoi(argv[1]);
 
+    if (factor <= 0 || factor > 100)
+    {
+        printf("Usage: resize n infile outfile\n");
+        return 1;
+    }
+
     // remember filenames
     char *infile = argv[2];
     char *outfile = argv[3];
