@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
     bi.biSizeImage = ((sizeof(RGBTRIPLE) * newWidth) + newPadding) * abs(newHeight);
     bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
     // sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER = 54
+
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
@@ -80,40 +81,41 @@ int main(int argc, char *argv[])
     // iterate over infile's scanlines
     for (int i = 0, biHeight = abs(oldHeight); i < biHeight; i++)
     {
-        for (int z = 0; z < factor - 1; z++)
+        // scans over the input line for number of factor output rows
+        for (int z = 0; z < factor; z++)
         {
-        // iterate over pixels in scanline
-        for (int j = 0; j < oldWidth; j++)
-        {
-            // temporary storage
-            RGBTRIPLE triple;
-
-            // read RGB triple from infile
-            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-            // iterate each pixel n times
-            for (int l = 0; l < factor; l++)
+            // iterate over pixels in scanline
+            for (int j = 0; j < oldWidth; j++)
             {
-                // write RGB triple to outfile
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                // temporary storage
+                RGBTRIPLE triple;
+
+                // read RGB triple from infile
+                fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+                // iterate each pixel n times
+                for (int l = 0; l < factor; l++)
+                {
+                    // write RGB triple to outfile
+                    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                }
             }
-        }
-        fseek(inptr, padding, SEEK_CUR);
+            fseek(inptr, padding, SEEK_CUR);
 
 
-        // then add it back (to demonstrate how)
-        for (int k = 0; k < newPadding; k++)
-        {
-            fputc(0x00, outptr);
-        }
+            // then add it back (to demonstrate how)
+            for (int k = 0; k < newPadding; k++)
+            {
+                fputc(0x00, outptr);
+            }
 
-        if (z < factor -1)
-        {
-            long reset = (bi.biWidth * sizeof(RGBTRIPLE) + padding);
-            fseek(inptr, -1 * reset, SEEK_CUR);
-        }
-        // // skip over padding, if any
-        // fseek(inptr, padding, SEEK_CUR);
+            // moves cursor back and iterates factor number of times on row
+            if (z < factor -1)
+            {
+                fseek(inptr, -1 * ((oldWidth * sizeof(RGBTRIPLE)) + padding), SEEK_CUR);
+            }
+            // // skip over padding, if any
+            // fseek(inptr, padding, SEEK_CUR);
         }
 
     }
